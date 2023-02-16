@@ -1,3 +1,9 @@
 ~
 # .idea file
 .idea
+
+# mysql data
+stored
+
+# mysql setting
+.env
