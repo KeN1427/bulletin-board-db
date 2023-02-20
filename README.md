@@ -9,25 +9,25 @@ Database for bulletin board application.
 | username     | VARCHAR(30) |
 | mail_address | VARCHAR(30) |
 | status       | ENUM        |
-| create_at    | DATETIME    |
-| update_at    | DATETIME    |
+| created_at   | DATETIME    |
+| updated_at   | DATETIME    |
 
 ### Threads
-| Column    | Type     |
-|:----------|:---------|
-| id        | INT(8)   |
-| user_id   | INT(8)   |
-| Status    | ENUM     |
-| create_at | DATETIME |
-| update_at | DATETIME |
+| Column     | Type     |
+|:-----------|:---------|
+| id         | INT(8)   |
+| user_id    | INT(8)   |
+| Status     | ENUM     |
+| created_at | DATETIME |
+| updated_at | DATETIME |
  
 ### Comments
-| Column    | Type     |
-|:----------|:---------|
-| id        | INT(8)   |
-| thread_id | INT(8)   |
-| user_id   | INT(8)   |
-| comment   | TEXT     |
-| status    | ENUM     |
-| create_at | DATETIME |
-| update_at | DATETIME |
+| Column     | Type     |
+|:-----------|:---------|
+| id         | INT(8)   |
+| thread_id  | INT(8)   |
+| user_id    | INT(8)   |
+| comment    | TEXT     |
+| status     | ENUM     |
+| created_at | DATETIME |
+| updated_at | DATETIME |
