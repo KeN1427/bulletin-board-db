@@ -1,6 +1,8 @@
 USE bulletin_board;
 
-CREATE TABLE IF NOT EXISTS Users (
+
+DROP TABLE IF EXISTS Users;
+CREATE TABLE Users (
   id           INT NOT NULL AUTO_INCREMENT,
   username     VARCHAR(30) NOT NULL DEFAULT '',
   mail_address VARCHAR(30) NOT NULL DEFAULT '',
@@ -9,6 +11,32 @@ CREATE TABLE IF NOT EXISTS Users (
   updated_at   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id)
 );
+CREATE INDEX idx_users_status ON Users (status);
 
-INSERT INTO Users (username, mail_address, status)
-VALUES ('Ken', 'abc@example.com', 'ENABLE');
+
+DROP TABLE IF EXISTS Threads;
+CREATE TABLE Threads (
+  id         INT NOT NULL AUTO_INCREMENT,
+  user_id    INT NOT NULL,
+  status     VARCHAR(10) NOT NULL DEFAULT 'OPEN', -- OPEN or CLOSE
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  FOREIGN KEY (user_id) REFERENCES Users (id)
+);
+CREATE INDEX idx_threads_status ON Threads (status);
+
+DROP TABLE IF EXISTS Comments;
+CREATE TABLE Comments (
+  id          INT NOT NULL AUTO_INCREMENT,
+  user_id  INT NOT NULL,
+  thread_id INT NOT NULL,
+  comment    VARCHAR(200) NOT NULL DEFAULT '',
+  status      VARCHAR(10) NOT NULL DEFAULT 'OPEN', -- OPEN or CLOSE
+  created_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  FOREIGN KEY (user_id) REFERENCES Users (id),
+  FOREIGN KEY (thread_id) REFERENCES Threads (id)
+);
+CREATE INDEX idx_comments_status ON Comments (status);
